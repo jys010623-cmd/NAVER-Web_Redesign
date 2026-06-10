@@ -290,3 +290,23 @@ $('.floating_menu a').click(function(){
 //   else{
 //         $('.part1line').removeClassClass('merong');
 //     }를 써주면 스크롤을 올렸다내렸다 해도 항상 500일 때 다시 효과가 보임
+
+
+
+
+/* Swiper 초기화 (메인 히어로 슬라이드) */
+if (typeof Swiper !== 'undefined' && document.querySelector('.mySwiper')) {
+    new Swiper('.mySwiper', {
+        speed: 1000,
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: { delay: 3000, disableOnInteraction: false },
+        pagination: { el: '.swiper-pagination', clickable: true },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        on: {
+            slideChange: function () {
+                $('.swiper-slide').eq(this.realIndex).addClass('on').siblings().removeClass('on');
+            },
+        },
+    });
+}

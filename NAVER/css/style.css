@@ -991,4 +991,4 @@ input[type="checkbox"]:checked ~ .new_input:before {content: ""; position: absol
 
     /* 회원가입 */
     .joinPage .input_box li {flex-direction: column;}
-}
+}

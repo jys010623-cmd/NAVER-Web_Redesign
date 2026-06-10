@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAVER</title>
+    <title>회원가입 | NAVER</title>
+    <meta name="description" content="네이버 회원가입 페이지입니다.">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="images/naver_whale.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css?20260508353">
@@ -64,50 +67,23 @@
                                     <input type="password" id="pw_confirm_input" name="비밀번호 확인"  placeholder="비밀번호를 입력하세요">
                                 </div>
                             </li>
-                            <!-- 여러가지 input -->
-<!--                              <li>
-                                <label for="">좋아하는 음식은?</label>
-                                <div class="content align_garo">
-                                    <span><input type="checkbox" id="food1" name="food1"> <span class="new_input"></span> <label for="food1">라면</label></span>
-                                    <span><input type="checkbox" id="food2" name="food2"> <span class="new_input"></span> <label for="food2">떡볶이</label></span>
-                                    <span><input type="checkbox" id="food3" name="food3"> <span class="new_input"></span> <label for="food3">마라탕</label></span>
-                                    <span><input type="checkbox" id="food4" name="food4"> <span class="new_input"></span> <label for="food4">허니버터치킨</label></span>
-                                    <span><input type="checkbox" id="food5" name="food5"> <span class="new_input"></span> <label for="food5">꿔바로우</label></span>
-                                </div>
-                            </li> -->
                             <li>
-                                <label for="">귀하의 성별은?</label>
+                                <label>귀하의 성별은?</label>
                                 <div class="content align_garo">
                                     <span><input type="radio" id="male" name="gender" value="남성"> <label for="male">남성</label></span>
                                     <span><input type="radio" id="female" name="gender" value="여성"> <label for="female">여성</label></span>
                                 </div>
                             </li>
                             <li>
-                                <label for="">생일선택</label>
+                                <label for="birth_input">생일선택</label>
                                 <div class="content align_garo">
-                                    <input type="date">
+                                    <input type="date" id="birth_input">
                                 </div>
                             </li>
-<!--                             <li>
-                                <label for="">몇학년?</label>
-                                <div class="content align_garo">
-                                    <select name="grade" id="">
-                                        <option value="grade1">1학년</option>
-                                        <option value="grade2">2학년</option>
-                                        <option value="grade3">3학년</option>
-                                    </select>
-                                </div>
-                            </li> -->
-<!--                             <li>
-                                <label for="">사진첨부</label>
-                                <div class="content align_garo">
-                                    <input type="file" accept=".jpt,.png,.webp,.gif">
-                                </div>
-                            </li> -->
                             <li class="textarea_box">
-                                <label for="">개인정보취급방침 안내</label>
+                                <label for="privacy_terms">개인정보취급방침 안내</label>
                                 <div class="content">
-                                    <textarea name="" id="">
+                                    <textarea name="privacy_terms" id="privacy_terms" readonly>
 네이버 개인정보 취급방침 (Ver.8.1)
 
 네이버는 이용자 개인정보 보호를 여러 경영요소 가운데 최우선의 가치로 두고 있습니다.
@@ -423,8 +399,8 @@ NICE평가정보㈜, 에스씨아이평가정보㈜, ㈜KG모빌리언스, ㈜�
         <div class="search_box">
             <div class="search_inner">
                 <form action="" method="">
-                    <input type="text" placeholder="검색어를 입력해주세요" name="search_keyboard">
-                    <button class="material-symbols-outlined on" type="submit">search</button>
+                    <input type="text" placeholder="검색어를 입력해주세요" name="search_keyboard" aria-label="검색어 입력">
+                    <button class="material-symbols-outlined on" type="submit" aria-label="검색">search</button>
                 </form>
             </div>
             <div class="search_word">
@@ -444,52 +420,9 @@ NICE평가정보㈜, 에스씨아이평가정보㈜, ㈜KG모빌리언스, ㈜�
 
 
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script src="script/jquery-4.0.0.min.js"></script>
     <script src="script/action.js?20260508353"></script>
-
-
-      <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-
-  <!-- Initialize Swiper -->
-  <script>
-        var swiper = new Swiper(".mySwiper", {
-        speed:1000,    
-        spaceBetween: 0,
-        centeredSlides: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-
-        on: {
-            slideChange: function() {
-                // $('.swiper-slide').removeClass('on');
-                $('.swiper-slide').eq(this.realIndex).addClass('on').siblings().remove('on');
-            },
-        },
-    });
-
-    //     on: {
-    //         slideChange: function() {
-    //             $('.swiper-slide').eq(this.realIndex).addClass('on') ->슬라이드가 바뀔 때마다 몇번째인지 구하는 명령어: realIndex
-    //         },
-    //     },
-    // });
-
-  </script>
-
-
-    
-
-
 </body>
 </html>

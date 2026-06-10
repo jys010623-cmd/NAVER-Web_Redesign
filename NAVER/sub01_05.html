@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAVER</title>
+    <title>오시는 길 | NAVER</title>
+    <meta name="description" content="네이버 오시는 길 안내 페이지입니다.">
+    <link rel="icon" href="images/naver_whale.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css?20260508353">
@@ -133,8 +135,8 @@
         <div class="search_box">
             <div class="search_inner">
                 <form action="" method="">
-                    <input type="text" placeholder="검색어를 입력해주세요" name="search_keyboard">
-                    <button class="material-symbols-outlined on" type="submit">search</button>
+                    <input type="text" placeholder="검색어를 입력해주세요" name="search_keyboard" aria-label="검색어 입력">
+                    <button class="material-symbols-outlined on" type="submit" aria-label="검색">search</button>
                 </form>
             </div>
             <div class="search_word">
@@ -154,52 +156,9 @@
 
 
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script src="script/jquery-4.0.0.min.js"></script>
     <script src="script/action.js?20260508353"></script>
-
-
-      <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-
-  <!-- Initialize Swiper -->
-  <script>
-        var swiper = new Swiper(".mySwiper", {
-        speed:1000,    
-        spaceBetween: 0,
-        centeredSlides: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-
-        on: {
-            slideChange: function() {
-                // $('.swiper-slide').removeClass('on');
-                $('.swiper-slide').eq(this.realIndex).addClass('on').siblings().remove('on');
-            },
-        },
-    });
-
-    //     on: {
-    //         slideChange: function() {
-    //             $('.swiper-slide').eq(this.realIndex).addClass('on') ->슬라이드가 바뀔 때마다 몇번째인지 구하는 명령어: realIndex
-    //         },
-    //     },
-    // });
-
-  </script>
-
-
-    
-
-
 </body>
 </html>
