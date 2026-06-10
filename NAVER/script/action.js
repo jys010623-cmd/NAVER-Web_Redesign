@@ -235,13 +235,13 @@ $(window).scroll(function(){
         let part2Top = $('#section2').offset().top;
         let part3Top = $('#section3').offset().top;
         if(scrT > part1Top - winH/3){
-        $('floating_menu li').eq(0).addClass('on').siblings().removeClass('on')
+        $('.floating_menu li').eq(0).addClass('on').siblings().removeClass('on')
         }
         if(scrT > part2Top - winH/3){
-        $('floating_menu li').eq(1).addClass('on').siblings().removeClass('on')
+        $('.floating_menu li').eq(1).addClass('on').siblings().removeClass('on')
         }
-        if(scrT > part3Top - win3H/3){
-        $('floating_menu li').eq(2).addClass('on').siblings().removeClass('on')
+        if(scrT > part3Top - winH/3){
+        $('.floating_menu li').eq(2).addClass('on').siblings().removeClass('on')
         }
     }
 
@@ -260,7 +260,7 @@ $('floating_menu a').eq(2).click(function(){
     $('html, body').animate({scrollTop:part1Top})
 }) */
 
-$('floating_menu a').click(function(){
+$('.floating_menu a').click(function(){
     let aHref = $(this).attr('href')
     let partTop = $(aHref).offset().top;
     $('html, body').animate({scrollTop:partTop})

@@ -21,7 +21,7 @@ body {font-family: "Pretendard", sans-serif;}
     --contGap:30px;
     --sectionPd:130px;
 }
-@media screen and(max-width:860px) {
+@media screen and (max-width:860px) {
     :root{
     --boxpd:20px; 
     --h2FontSize:40px;
@@ -991,4 +991,4 @@ input[type="checkbox"]:checked ~ .new_input:before {content: ""; position: absol
 
     /* 회원가입 */
     .joinPage .input_box li {flex-direction: column;}
-}
+}
