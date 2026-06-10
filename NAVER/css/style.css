@@ -1,0 +1,994 @@
+@charset "UTF-8";
+@import url(reset.css);
+@import url(font.css);
+
+/* html {scroll-behavior: smooth;} */
+body {font-family: "Pretendard", sans-serif;}
+/* body{
+  --pcGap:50px; 
+  --pcTitH2:60px;
+  --pcH2Gap:100px;
+
+  --moGap:15px;
+  --moTitH2:40px;
+  --moH2Gap:50px;
+} */
+
+:root{
+    --boxpd:50px; 
+    --h2FontSize:60px;
+    --h2Gap:100px;
+    --contGap:30px;
+    --sectionPd:130px;
+}
+@media screen and(max-width:860px) {
+    :root{
+    --boxpd:20px; 
+    --h2FontSize:40px;
+    --h2Gap:50px;
+    --contGap:15px;
+    --sectionPd:50px;
+    }
+}
+/* button style */
+.btn_arrow {font-size: 20px; font-weight: 300; display: inline-flex; align-items: center; gap: 10px; position: relative;}
+.btn_arrow::after {content: ""; display: block; width: 44px; height: 1px; background: #000; transition: 0.5s;}
+.btn_arrow::before{content: ""; position: absolute; width: 12px; height: 1px; background: #000; right: 0; transform: rotate(45deg); transform-origin:right ; transition: 0.5s;}
+
+.btn_arrow:hover:after{}
+.btn_arrow:hover:before{animation: btnArrow 0.5s forwards;}
+@keyframes btnArrow {
+  0%{transform: rotate(45deg);}
+  50%{transform: rotate(0deg);}
+  100%{transform: rotate(45deg);}
+}
+
+
+
+/* common */
+header{max-width: 1650px; position: absolute; width: 100%; left: 50%; transform: translateX(-50%); top: 30px; z-index: 3;}
+
+header .topset{display: flex; justify-content: space-between; align-items: center;}
+
+header .topset nav{}
+header .topset nav .gnb{display: flex;}
+
+/* 좌측 메뉴 (소개, 서비스 등) 시안 맞춤 스타일 */
+header .topset nav .gnb > li {font-size: 16px; position: relative;}
+header .topset nav .gnb > li > a {
+    color: #ffffff; /* 어두운 색에서 흰색으로 변경! */
+    font-size: 16px; /* 세련된 크기로 축소 */
+    font-weight: 500;
+    padding: 15px 2vw; 
+    display: block; 
+    transition: 0.2s;
+}
+header .topset nav .gnb > li:hover > a {color: #03cf5d;} /* 마우스 올리면 네이버 초록색으로 */
+
+/* 중앙 로고 위치 및 크기 미세조정 */
+header h1 {position: absolute; left: 50%; transform: translate(-50%); width: 130px; top: 0;} 
+header h1 img {width: 100%;}
+
+/* 우측 메뉴 (Login, Notice) 시안 맞춤 스타일 */
+header .topset .login_box a {
+    font-size: 16px; /* 크기 축소 */
+    color: #ffffff; 
+    padding: 10px 1.5vw;
+    font-weight: 500;
+    transition: 0.2s;
+}
+header .topset .login_box a:hover {color: #03cf5d;}
+
+/* ==========================================
+   헤더 서브메뉴 (LNB) 호버 & 드롭다운 스타일
+========================================== */
+
+/* 1. 서브메뉴를 감싸는 박스 스타일 (다크 & 반투명) */
+header .topset nav .gnb > li .lnb,
+header .topset nav .gnb > li .lnb_box .lnb {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 15, 20, 0.85); /* 우주 배경이 은은하게 비치는 다크 컬러 */
+    backdrop-filter: blur(8px); /* 뒷배경 블러 처리로 고급스러움 추가 */
+    width: 160px; /* 기존의 너무 넓었던 600px에서 심플한 너비로 변경 */
+    border-radius: 12px;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+/* 2. 대메뉴에 마우스를 올렸을 때 서브메뉴가 스르륵 내려오는 효과 */
+header .topset nav .gnb > li:hover .lnb,
+header .topset nav .gnb > li:hover .lnb_box .lnb {
+    max-height: 400px;
+    padding: 15px 0;
+}
+
+/* 3. 서브메뉴 내부 리스트 정렬 */
+header .topset nav .gnb li .lnb li {
+    width: 100%;
+    text-align: center;
+}
+
+/* 4. 서브메뉴 기본 글자 스타일 */
+header .topset nav .gnb li .lnb li a {
+    color: #cccccc; /* 차분한 밝은 회색 */
+    padding: 12px 0;
+    display: block;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+/* 5. [핵심] 서브메뉴에 마우스를 올렸을 때 (호버 효과) */
+header .topset nav .gnb li .lnb li:hover a {
+    color: #03cf5d; /* 네이버 시그니처 초록색으로 하이라이트! */
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05); /* 마우스 올린 줄만 살짝 밝아지게 */
+}
+
+/* 기존 템플릿에 있던 불필요한 장식(점, 꼬리표 삼각형 등) 완전히 삭제 */
+header .topset nav .gnb li .lnb_box::before { display: none; }
+header .topset nav .gnb li .lnb li:before { display: none; }
+
+
+
+/* header h1{position: absolute; left: 50%; transform: translate(-50%); width: 173px; top: -10px;}  */
+header h1 img{width: 100%;} 
+
+
+
+
+header .topset .login_box{}
+header .topset .login_box .login{display: flex;}
+/* header .topset .login_box a{font-size: 22px; color: #fff; padding: 10px 1.77vw;} */
+header .topset .login_box .logout{display: none}
+
+.topset_mobile{display: none;}
+
+
+
+#hero{background: lightcoral; height: 100vh;}
+#hero .textbox{position: absolute; z-index: 2; left: 50%; top: 30%; transform: translate(-50%,0); color: #fff; text-align: center;}
+#hero .textbox strong{font-size: 80px; display: block; line-height: 1.2; font-family: 'Abhaya Libre';}
+#hero .textbox p{font-size: 30px; word-break: keep-all;}
+
+#hero .swiper-slide.on .textbox strong{animation: slideAni 1s forwards;}
+#hero .swiper-slide.on .textbox p{animation: slideAni 1s forwards; animation-delay: 1s; opacity: 0;}
+
+
+@keyframes slideAni {
+    0%{opacity: 0; margin-top: 50px;}
+    100%{opacity: 1; margin-top: 0;}    
+}
+
+
+
+
+
+#hero video{width: 100%; height: 100%; object-fit: cover;}
+
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #444;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+
+
+
+
+
+
+
+
+
+#section_box{}
+.container {max-width: 1400px; margin: 0 auto; padding: var(--sectionPd) var(--boxpd)}
+
+
+
+/* ==========================================
+   SECTION 1 (네이버 소개 - 좌우 분할 구조)
+========================================== */
+#section1 {
+    background: url(../images/leap1.png) no-repeat right bottom;
+    padding: var(--sectionPd) 0;
+}
+
+/* 컨테이너 가로 분할 핵심 */
+#section1 .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* 상단 기준 정렬 */
+    gap: 60px; /* 좌측 글자박스와 우측 이미지박스 사이 간격 */
+}
+
+/* 1. 좌측 텍스트 영역 */
+#section1 .info_box {
+    width: 28%; /* 좌측 영역 너비 비율 */
+    flex-shrink: 0;
+}
+
+#section1 .info_box h2 {
+    font-size: var(--h2FontSize);
+    color: #1E3622;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+#section1 .info_box .desc {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    word-break: keep-all;
+}
+
+/* 2. 우측 이미지 그룹 콘텐츠 박스 */
+#section1 .container .content_box {
+    width: 72%; /* 우측 영역 너비 비율 */
+    display: flex;
+    gap: var(--contGap);
+}
+
+/* 큰 이미지 스타일링 */
+#section1 .container .content_box .bigimg {
+    width: 50%;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+}
+#section1 .container .content_box .bigimg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 프레임에 꽉 차게 정렬 */
+}
+
+/* 작은 이미지 2x2 배열 셋팅 */
+#section1 .container .content_box .smallimg {
+    width: 50%;
+}
+#section1 .container .content_box .smallimg ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--contGap);
+}
+#section1 .container .content_box .smallimg li {
+    /* 변수 간격을 제외하고 정확히 가로 2개씩 채우도록 calc 계산 */
+    width: calc((100% - var(--contGap)) / 2); 
+    position: relative;
+    aspect-ratio: 4 / 3; /* 작은 이미지들의 일정한 비율 유지 */
+    border-radius: 10px;
+    overflow: hidden;
+}
+#section1 .container .content_box .smallimg li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 딤드(어두운) 오버레이 레이어 및 텍스트 위치 정렬 */
+#section1 .container .content_box .smallimg li::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25); /* 시안 무드에 맞춘 은은한 어둠 */
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+#section1 .container .content_box .smallimg li.on::before {
+    display: none;
+}
+
+/* 미디어 쿼리 반응형 스타일 업데이트 */
+@media screen and (max-width: 1200px) {
+    #section1 .container {
+        flex-direction: column; /* 태블릿/모바일 크기에서는 위아래로 배치 */
+        gap: 40px;
+    }
+    #section1 .info_box {
+        width: 100%;
+    }
+    #section1 .container .content_box {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    #section1 .container .content_box {
+        flex-direction: column;
+    }
+    #section1 .container .content_box .bigimg {
+        width: 100%;
+    }
+    #section1 .container .content_box .smallimg {
+        width: 100%;
+    }
+}
+
+/* 상단 ABOUT NAVER 타이틀 */
+#section1 .section_top_title {
+    text-align: center;
+    color: #03cf5d; /* 네이버 초록색 */
+    font-size: 28px; /* 기존 20px에서 28px로 확 키웠습니다! */
+    font-weight: 900; /* 시안처럼 아주 두껍고 묵직하게 변경 */
+    margin-bottom: 60px; 
+    letter-spacing: 2px; /* 자간을 살짝 넓혀서 시원한 느낌 추가 */
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 좌측 텍스트 정렬 초기화 */
+#section1 .info_box {
+    display: flex;
+    flex-direction: column; /* 세로로 차곡차곡 쌓기 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+}
+#section1 .info_box h2 {
+    display: block; /* 기존 flex 무효화 */
+    margin-bottom: 25px;
+}
+#section1 .info_box .desc {
+    margin-bottom: 50px; /* 버튼과의 간격 벌리기 */
+}
+
+/* 이미지 하단 회색 여백 제거의 핵심 */
+#section1 figure {
+    margin: 0; /* figure의 기본 여백(margin) 제거 */
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+#section1 figure img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==========================================
+   SECTION 2 (네이버 플랫폼)
+========================================== */
+#section2 {
+    background: #f4f5f7; /* 시안의 깔끔한 연회색 배경 */
+    padding: 120px 0;
+}
+
+/* 좌우 분할을 위한 Flex 설정 */
+#section2 .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 위아래 중앙 맞춤 */
+    gap: 50px;
+}
+
+/* 1. 좌측 텍스트 영역 */
+#section2 .title_wrap {
+    width: 30%;
+    flex-shrink: 0;
+}
+
+#section2 .title_wrap h2 {
+    font-size: 40px;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 25px;
+    font-family: 'Pretendard', sans-serif; /* 폰트를 모던하게 변경 */
+}
+
+#section2 .title_wrap .text p {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    word-break: keep-all;
+}
+
+/* 2. 우측 화이트 카드 영역 */
+#section2 .banner {
+    display: flex;
+    width: 70%;
+    gap: 20px; /* 카드 사이의 간격 */
+}
+
+/* 개별 카드 스타일링 */
+#section2 .banner li {
+    background: #fff;
+    border-radius: 20px; /* 시안처럼 모서리 둥글게 */
+    padding: 50px 30px;
+    flex: 1; /* 3개의 카드가 동일한 너비를 가짐 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); /* 부드럽고 고급스러운 그림자 */
+    transition: transform 0.3s ease; /* 마우스 올렸을 때 애니메이션 준비 */
+}
+
+/* 마우스 올렸을 때 카드가 살짝 떠오르는 효과 (선택사항) */
+#section2 .banner li:hover {
+    transform: translateY(-10px);
+}
+
+/* 카드 내 아이콘 이미지 */
+#section2 .banner li figure {
+    height: 60px; /* 로고 이미지 높이 고정 */
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#section2 .banner li figure img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* 카드 내 설명 텍스트 */
+#section2 .banner li p {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    word-break: keep-all;
+    flex-grow: 1; /* 글자 수가 달라도 하단 SEARCH 등의 글자 위치를 일정하게 맞춤 */
+}
+
+/* 카드 하단 영문 강조 타이틀 */
+#section2 .banner li strong {
+    font-size: 20px;
+    font-weight: 800;
+    color: #111;
+    letter-spacing: 1px;
+}
+
+/* ==========================================
+   SECTION 2 반응형 (모바일)
+========================================== */
+@media screen and (max-width: 860px) {
+    #section2 .container {
+        flex-direction: column; /* 모바일에서는 위아래로 배치 */
+        align-items: flex-start;
+    }
+    #section2 .title_wrap {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    #section2 .banner {
+        width: 100%;
+        flex-direction: column; /* 카드를 세로로 쌓기 */
+        gap: 20px;
+    }
+}
+
+
+
+
+/* ==========================================
+   SECTION 3 (네이버 서비스 - 세로형 리스트)
+========================================== */
+#section3 {
+    padding: 100px 0;
+    background: #fff;
+}
+
+#section3 .container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* 1. 타이틀 영역 (중앙 정렬) */
+#section3 .title_area {
+    text-align: center;
+    margin-bottom: 50px;
+}
+#section3 .title_area h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 15px;
+    display: block; /* 기존 h2에 있던 flex 속성 덮어쓰기 */
+}
+#section3 .title_area span {
+    font-size: 22px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* 2. 양옆 화살표 + 리스트 래퍼 */
+#section3 .slider_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px; /* 화살표와 리스트 사이의 간격 */
+}
+
+#section3 .nav_btn {
+    background: none;
+    border: none;
+    font-size: 35px; /* 화살표 크기도 살짝 키웠습니다 */
+    color: #555;
+    cursor: pointer;
+    transition: 0.2s;
+    
+    /* 아이콘 깨짐 완벽 방지용 코드 */
+    font-family: 'Material Symbols Outlined' !important;
+    text-transform: none !important;
+}
+
+#section3 .nav_btn:hover {
+    color: #000;
+}
+
+/* 3. 중앙 리스트 박스 */
+#section3 .content_box {
+    width: 100%;
+    max-width: 900px; /* 시안처럼 텍스트 줄바꿈이 예쁘게 되도록 최대 너비 제한 */
+}
+
+/* 세로로 쌓이는 목록 */
+#section3 .content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#section3 .content li {
+    width: 100%; /* 기존 calc() 너비값 덮어쓰기 */
+    margin-bottom: 0; /* 기존 마진 덮어쓰기 */
+    border-bottom: 1px solid #eee; /* 시안의 얇은 가로선 */
+    padding: 30px 0;
+}
+#section3 .content li:first-child {
+    border-top: 1px solid #eee; /* 첫 번째 항목 위쪽 선 */
+}
+
+/* 리스트 내부 (아이콘 좌 - 텍스트 우) */
+#section3 .content li a {
+    display: flex;
+    align-items: center;
+    gap: 40px; 
+    text-decoration: none;
+}
+
+/* 4. 아이콘 크기 고정 */
+#section3 .content li a figure {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0; /* 공간이 좁아져도 이미지가 찌그러지지 않게 방어 */
+    margin-bottom: 0;
+}
+#section3 .content li a figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 로고가 잘리지 않게 비율 유지 */
+}
+
+/* 5. 텍스트 영역 */
+#section3 .content li a .text_box {
+    flex-grow: 1;
+}
+#section3 .content li a .text_box h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 8px; /* 기존의 큰 마진 지우기 */
+}
+#section3 .content li a .text_box .desc {
+    font-size: 15px;
+    color: #777;
+    line-height: 1.6;
+    word-break: keep-all;
+}
+
+/* 섹션3 각 아이템(li) 가로 배치 정렬 */
+#section3 .container .content_box .content li a {
+    display: flex;
+    align-items: center; /* 아이콘과 텍스트 중앙 맞춤 */
+    gap: 40px;           /* 아이콘과 텍스트 사이 간격 */
+    text-decoration: none;
+}
+
+/* 1. 거대했던 이미지 감싸는 박스(figure) 크기 고정!! */
+#section3 .container .content_box .content li a figure {
+    width: 90px;         /* 시안에 맞는 적당한 아이콘 가로 크기 */
+    height: 90px;        /* 세로 크기 */
+    flex-shrink: 0;      /* 레이아웃이 줄어들어도 이미지 크기 유지 */
+    margin-bottom: 0;    /* 기존의 50px 마진 지우기 */
+    border-radius: 20px; /* 시안처럼 부드러운 라운딩 효과 */
+    overflow: hidden;
+}
+
+/* 2. 고정된 박스 안에 이미지가 꽉 차게 정렬 */
+#section3 .container .content_box .content li a figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 로고 이미지가 잘리지 않고 비율 유지하며 들어가게 설정 */
+}
+
+
+
+
+
+/* ==========================================
+   FOOTER STYLE (시안 맞춤형 좌우 분할 구조)
+========================================== */
+footer {
+    background-color: #f4f5f7;
+    padding: 80px 0 40px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.footer_container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 var(--boxpd) 60px; /* 좌우 여백 변수 적용 */
+    border-bottom: 1px solid #ddd;
+}
+
+/* 좌측 로고 영역 */
+.footer_left h2 {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 80px;
+    color: #111;
+}
+
+.footer_left .logo {
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: #111;
+}
+
+/* 우측 4단 메뉴 영역 */
+.footer_right {
+    display: flex;
+    gap: 80px;
+}
+
+.footer_group h3 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+.footer_group ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer_group ul li a {
+    font-size: 13px;
+    color: #666;
+    transition: 0.2s;
+}
+
+.footer_group ul li a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+/* 푸터 맨 밑 하단 약관 링크 및 SNS */
+.footer_bottom_terms {
+    max-width: 1400px;
+    margin: 30px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--boxpd);
+}
+
+.terms_inner {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.sns_mini {
+    display: flex;
+    gap: 5px;
+}
+
+.sns_mini span {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    background: #03cf5d;
+    color: #fff;
+    font-size: 10px;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.term_links {
+    display: flex;
+    gap: 15px;
+}
+
+.term_links li a {
+    font-size: 12px;
+    color: #444;
+    font-weight: 500;
+}
+
+.term_links li a.bold {
+    font-weight: 800;
+    color: #111;
+}
+
+/* ==========================================
+   FOOTER 반응형 (태블릿 & 모바일)
+========================================== */
+@media screen and (max-width: 1024px) {
+    .footer_right {
+        gap: 40px;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .footer_container {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .footer_left h2 {
+        margin-bottom: 30px;
+    }
+    .footer_right {
+        flex-wrap: wrap; /* 모바일에서 메뉴가 여러 줄로 떨어지게 설정 */
+        gap: 30px 50px;
+    }
+    .footer_bottom_terms {
+        justify-content: flex-start;
+    }
+    .terms_inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .term_links {
+        flex-wrap: wrap; /* 메뉴가 많을 경우 자동 줄바꿈 */
+    }
+}
+
+.floating_menu {position: absolute; right: 50px; top: 50%; transform: translateY(-50%); z-index: 10; transition: 0.2s;}
+.floating_menu ul {}
+.floating_menu ul li {font-size: 24px; width: 40px; height: 40px; background: #1E3622; border-radius: 50%; margin-bottom: 10px;}
+.floating_menu ul li a {color: #fff; display: flex; justify-content: center; align-items: center; height: 100%;}
+
+.floating_menu ul li:hover {background: #3c9e4d;}
+.floating_menu ul li.on {background: #3c9e4d;}
+
+
+
+.search_wrap{position: fixed; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.8); left: 0; top: 0; display: none; z-index: 5;}
+.search_wrap .search_box{max-width: 700px; position: absolute; width: 100%; left: 50%; top: 50%; transform: translate(-50%, -50%);}
+
+.search_wrap .search_inner{position: relative;}
+.search_wrap .search_inner input{font-size: 22px; padding: 25px 100px; border-radius: 30px; width: 100%; text-align: center; box-sizing: border-box;}
+/* .search_wrap .search_inner input:focus{border: 1px solid pink;} */
+.search_wrap .search_inner .material-symbols-outlined{position: absolute; font-size: 45px; right: 30px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #ddd; pointer-events: none;}
+
+.search_wrap .search_inner .material-symbols-outlined.on{color: #000;}
+
+
+.search_wrap .search_word{}
+.search_wrap .search_word .word{display: flex; gap: 20px; padding-left: 50px;}
+.search_wrap .search_word .word li{color: #fff; font-size: 18px; position: relative; text-indent: 10px; line-height: 3;}
+.search_wrap .search_word .word li:before{content:""; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff; top: 50%; transform:  translateY(-50%); left: 0; transition: 0.15s;}
+
+.search_wrap .search_close{position: relative;  width: 80px; height: 80px; margin: 100px auto 0; cursor: pointer;}
+.search_wrap .search_close span{position: absolute; width: 100px; height: 2px; background: #fff; top: 50%; transform: translateY(-50%); left: 0; transition: 0.3s;}
+.search_wrap .search_close span:nth-child(1){transform: rotate(45deg);}
+.search_wrap .search_close span:nth-child(2){transform: rotate(-45deg);}
+
+.search_wrap .search_close:hover span:nth-child(1){transform: rotate(-45deg); background: #f3e3d1;}
+.search_wrap .search_close:hover span:nth-child(2){transform: rotate(45deg); background: #f7ede3;}
+
+
+
+
+
+
+
+/* sub 공통 */
+#hero_sub {background: url('../images/hero_sub1.jpg') center top; background-size: cover; height: 300px; position: relative;}
+#hero_sub .textbox {position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%,0); color: #fff; text-align: center;}
+#hero_sub .textbox strong {font-size: 50px; display: block; line-height: 1.2; font-family: 'Abhaya Libre';}
+#hero_sub .textbox p {font-size: 20px; word-break: keep-all;}
+
+#section_box_sub nav {margin: 50px 0 70px 0;}
+#section_box_sub nav .snb {display: flex; justify-content: center; gap: 37px;}
+#section_box_sub nav .snb li {font-size: 22px; position: relative;}
+#section_box_sub nav .snb li:before {content: ""; position: absolute; width: 3px; height: 3px; background: #B1977E; top: 50%; transform: translateY(-50%); left: -8px;}
+#section_box_sub nav .snb li a {}
+#section_box_sub nav .snb li.on a {color: #AA7D4E;}
+
+#section_box_sub h2 {font-size: 55px; text-align: center; margin-bottom: 40px; color: #023729; text-transform: uppercase;}
+.container_sub {max-width: 1400px; margin: 0 auto; padding: 0 var(--boxpd) 100px;}
+
+
+/* login page */
+.loginPage .login_box {max-width: 600px; margin: 0 auto;}
+.loginPage .login_box input {height: 50px; border: 1px solid #ccc; font-size: 18px; text-indent: 14px; margin-bottom: 14px; width: 100%;}
+.loginPage .login_box input::placeholder {color: #aaa;}
+
+.btn {height: 60px; background: #1A6DFF; width: 100%; color: #fff; font-size: 20px; cursor: pointer; position: relative;}
+/* .btn:hover {background: #0f55ce;} */
+.btn:hover:before {content: ""; background: rgba(0, 0, 0, 0.2); position: absolute; width: 100%; height: 100%; left: 0; top: 0;}
+.btn span {position: relative; z-index: 2;}
+
+.btnColor1 {background: red;}
+/* .btnColor1:hover {background: rgb(201, 0, 0);} */
+
+.loginPage .login_box .ex {margin-top: 20px; color: #777; word-break: keep-all;}
+.loginPage .login_box .ex a {color: #1A6DFF;}
+
+
+/* 회원가입 */
+.joinPage .input_box {margin-bottom: 50px;}
+.joinPage .input_box li {display: flex; margin-bottom: 12px;}
+.joinPage .input_box li > label {width: 160px; font-size: 16px; display: flex; align-items: center;}
+.joinPage .input_box li .content {flex-grow: 1; height: 46px;}
+.joinPage .input_box li .content input {border: 1px solid #ccc; width: 100%; font-size: 16px; padding: 0.8em 0; text-indent: 10px; box-sizing: border-box; background: #f9f9f9;}
+.joinPage .input_box li .content input:focus {border: 1px solid #1A6DFF; background: #fff;}
+
+.joinPage .input_box li .content input:focus::placeholder {color: transparent;}
+
+.joinPage .input_box li .align_garo {display: flex; gap: 15px;}
+.joinPage .input_box li .align_garo span {display: flex; white-space: nowrap; gap: 5px; align-items: center;}
+.joinPage .input_box li .content input[type="checkbox"] {height: 22px; width: 22px; display: none;}
+.joinPage .input_box li .content input[type="radio"] {height: 22px; width: 22px;}
+.joinPage .input_box li .content input[type="file"] {border: 0; background: none; text-indent: 0;}
+
+.joinPage .input_box li .content select {border-radius: 0; border: 1px solid #ccc; font-size: 18px; padding: 0 10px;}
+
+.joinPage .input_box li .content textarea {width: 100%; height: 200px; padding: 15px; box-sizing: border-box; white-space: pre-wrap;}
+
+.joinPage .input_box li.textarea_box {height: auto;}
+.joinPage .input_box li.textarea_box .content {height: auto;}
+/* 스크롤바 막대 */
+
+/* 스크롤바의 폭 너비 */
+textarea::-webkit-scrollbar {
+    width: 10px;  
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background: rgba(220, 20, 60); /* 스크롤바 색상 */
+    border-radius: 10px; /* 스크롤바 둥근 테두리 */
+}
+
+textarea::-webkit-scrollbar-track {
+    background: rgba(220, 20, 60, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+::selection {background: #496561; color: #fff;}
+
+
+.new_input {width: 22px; height: 22px; border: 1px solid #aaa; display: block; position: relative;}
+input[type="checkbox"]:checked ~ .new_input:before {content: ""; position: absolute; width: 12px; height: 12px; background: #000; left: 50%; top: 50%; transform: translate(-50%, -50%);}
+
+
+/* 태블릿 861~1200 */
+@media screen and (max-width: 1200px){
+    header{top: 20px;}
+    header h1{width: 150px; position: relative;}
+
+    .content_box{flex-direction: column;}
+    #section1 .container .content_box .bigimg{width: 100%;}
+    #section1 .container .content_box .smallimg{width: 100%;}
+    #section1 .container .content_box .smallimg li{width: 20%;}
+}
+
+/* 모바일 */
+@media screen and (max-width: 860px){
+   header .topset{display: none;}
+
+   .hamburger{position: absolute; width: 40px; height: 40px;  right: 20px; top: 10px; z-index: 7;}
+
+   .hamburger span{position: absolute; width: 20px; height: 2px; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #000;}
+
+   .hamburger span:before, .hamburger span:after{content:""; position: absolute; width: 100%; height: 100%; background: inherit; left: 0; transition: 0.5s; background: #000;}
+
+
+    .hamburger span:before{top: -7px;}
+    .hamburger span:after{top: 7px;}
+
+    .hamburger.on span{background: rgba(255, 255, 255, 0)}
+
+
+    .hamburger.on span::before{transform: rotate(135deg); top: 0; background: #fff;}
+    .hamburger.on span::after{transform: rotate(-135deg); top: 0; background: #fff;}
+
+
+
+    .topset_mobile{position: fixed; width: 100%; height: 100vh; left: 0; top: -20px; background: rgba(0, 0, 0, 0.8);  z-index: 5;}
+
+    .topset_mobile .topset_monav{width: 300px; height: 100vh; background: rgb(141, 16, 37); position: fixed; top: -20px; right: -300px; padding: 0 20px; box-sizing: border-box; transition: 0.5s; }
+
+    .topset_mobile .topset_monav.on{right: 0;}
+
+    .topset_mobile h1{margin-top: 20px;}
+    .topset_mobile .login_box .login{display: flex; gap: 2px;}
+    .topset_mobile .login_box a{color: rgb(141, 16, 37); width: 50%; text-align: center; padding: 12px 0; background: #fff;}
+    .topset_mobile .login_box .logout{display: none;}
+
+    .topset_mobile nav{margin-top: 70px; border: 1px solid #000; height: calc(100vh - 230px); overflow: auto;}
+    .topset_mobile nav .gnb{}
+    .topset_mobile nav .gnb li{text-align: center;}
+    .topset_mobile nav .gnb > li > a{color: #fff; padding: 15px 0; display: block; font-size: 20px;}
+    .topset_mobile nav .gnb li .lnb{background: rgb(221, 89, 111); display: none;}
+    .topset_mobile nav .gnb li .lnb li{}
+    .topset_mobile nav .gnb li .lnb li a{color: #fff; padding: 15px 0; display: block;}
+
+    #hero .textbox strong{font-size: 60px;}
+
+    /* .container{padding: 0 20px;} */
+
+
+
+    #section1 .container h2 {flex-direction: column;}
+    #section1 .container h2 strong {font-size: var(--h2FontSize);}
+    #section1 .container h2 a{display: none;}
+    #section1 .part1line path{stroke-width: 3px;}
+
+    /* #section1 .container .content_box{gap: var(--contGap); margin-top: var(--h2Gap);}
+    #section1 .container .content_box .smallimg ul{gap: var(--contGap);} */
+    #section2 .container .content .banner {flex-direction: column; gap: 30px;}
+    #section2 .container .content .banner li {text-align: center; padding: 0; border: 0;}
+    #section2 .container .content .banner li img {width: 60%;}
+
+    .floating_menu {display: none;}
+
+
+
+    /* sub 공통 */
+    #hero_sub .textbox {width: 100%;}
+    #hero_sub .textbox strong {line-height: 0.8;}
+
+    #section_box_sub nav {display: none;}
+    #section_box_sub h2 {padding-top: 50px; font-size: 30px;}
+
+
+
+    /* 회원가입 */
+    .joinPage .input_box li {flex-direction: column;}
+}
