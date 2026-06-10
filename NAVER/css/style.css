@@ -829,7 +829,7 @@ footer {
 
 
 /* sub 공통 */
-#hero_sub {background: url('../images/hero_sub1.jpg') center top; background-size: cover; height: 300px; position: relative;}
+#hero_sub {background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url('../images/hero1.png') center center; background-size: cover; height: 300px; position: relative;}
 #hero_sub .textbox {position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%,0); color: #fff; text-align: center;}
 #hero_sub .textbox strong {font-size: 50px; display: block; line-height: 1.2; font-family: 'Abhaya Libre';}
 #hero_sub .textbox p {font-size: 20px; word-break: keep-all;}
